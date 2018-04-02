@@ -1,10 +1,9 @@
 package com.example.test05;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,7 @@ public class SelectBeersControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Step #1: get input parameters
+		// Step #1: get & pre-process input parameters
 		request.setCharacterEncoding("UTF-8");
 		String color = request.getParameter("color");
 		
@@ -46,6 +45,7 @@ public class SelectBeersControl extends HttpServlet {
 		ArrayList<String> brands = expert.getBrands(color);
 		
 		// Step #3: output processing results
+/*		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		
@@ -60,6 +60,12 @@ public class SelectBeersControl extends HttpServlet {
 		}
 		
 		out.println("</center>");
+*/
+		request.setAttribute("brands", brands);
+		
+		RequestDispatcher view 
+			= request.getRequestDispatcher("BeerSelectView.jsp");
+		view.forward(request, response);
 	}
 
 }
