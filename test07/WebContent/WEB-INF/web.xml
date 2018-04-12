@@ -10,9 +10,27 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <context-param>
+  	<param-name>master_email</param-name>
+  	<param-value>master@example.com</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>db_host</param-name>
+  	<param-value>192.168.1.10:3377</param-value>
+  </context-param>
+  
   <servlet>
   	<servlet-name>simple_login</servlet-name>
   	<servlet-class>com.example.test07.SimpleLogin</servlet-class>
+  	<init-param>
+  		<param-name>logfile_name</param-name>
+  		<param-value>/Users/comit/loginlog1.txt</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>admin_email</param-name>
+  		<param-value>admin@example.com</param-value>
+  	</init-param>
   </servlet>
   <servlet-mapping>
   	<servlet-name>simple_login</servlet-name>

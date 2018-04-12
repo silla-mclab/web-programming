@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.GregorianCalendar;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,22 @@ public class SimpleLogin extends HttpServlet {
 		out.println("<div align='center'>");
 		out.println(name + "님, 반갑습니다!...");
 		out.println("</div>");
+		out.println("<br><br><br><br><br><br><br><br><hr>");
+
+//		ServletContext context = getServletConfig().getServletContext();
+		ServletContext context = getServletContext();		
+
+		out.println("<div align='center'>");
+		out.println(
+			"Contact Point: " + getInitParameter("admin_email") + "<br>" 
+			+ "Master Contact Point: " + 
+						context.getInitParameter("master_email") + "<br>"
+			+ "Server Info: " + 
+						context.getServerInfo() + "<br>"
+			+ "Servlet API Version: ver." + 
+						context.getMajorVersion() + "." 
+						+ context.getMinorVersion() + "<br>"
+			+ "</div>");
 	}
 
 	private void writeLog(String msg) {
@@ -78,7 +95,10 @@ public class SimpleLogin extends HttpServlet {
 		if (logFile == null) {
 			try {
 				logFile = new PrintWriter(
-						new FileWriter("/Users/comit/loginlog.txt", true));
+						new FileWriter(
+							getServletConfig().getInitParameter("logfile_name"),
+							true));
+//				    new FileWriter("/Users/comit/loginlog.txt", true));
 //					new FileWriter("c:\\loginlog.txt", true));
 				
 			} catch (IOException e) {
