@@ -2,7 +2,9 @@ package com.example.test09;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,8 +58,18 @@ public class RegisterPinfo extends HttpServlet {
 		
 		// Step #2: data processing
 		// Save personal info to DB
+		Properties dbTable 
+			= (Properties)getServletContext().getAttribute("pinfo_table");
+		PinfoDao dao = new PinfoDao(dbTable);
+		String result = dao.savePseronalInfo(pInfo);
 		
 		// Step #3: out processing result
+		request.setAttribute("result", result);
+		
+		RequestDispatcher view 
+			= request.getRequestDispatcher("Result.jsp");
+		view.forward(request, response);		
+/*
 		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
@@ -84,6 +96,7 @@ public class RegisterPinfo extends HttpServlet {
 		out.println("9. 자기소개 :" + pInfo.getIntro() + "<br><br>");
 		out.println("</body>");
 		out.println("</html>");
+*/
 	}
 
 }

@@ -10,6 +10,15 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <context-param>
+  	<param-name>db_file</param-name>
+  	<param-value>/Users/comit/pinfo.db</param-value>
+  </context-param>
+  
+  <listener>
+  	<listener-class>com.example.test09.MyServletContextListener</listener-class>
+  </listener>
+  
   <servlet>
   	<servlet-name>register_pinfo</servlet-name>
   	<servlet-class>com.example.test09.RegisterPinfo</servlet-class>
