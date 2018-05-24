@@ -21,10 +21,18 @@
 		<br><br><br>
 		<a href="calculate.html">첫페이지로 가기</a><p><hr>
 	<%
-		RequestDispatcher view = request.getRequestDispatcher("today.jsp");
-		view.include(request, response);
-	%>				
-		
+		out.flush();
+
+//		RequestDispatcher view = request.getRequestDispatcher("today.jsp");
+//		view.include(request, response);
+//		pageContext.include("today.jsp");
+	%>
+		<jsp:include page="today.jsp" />
+
+<%--		
+		<%@ include file="today.jsp" %>
+--%>		
+		<br><br>감사합니다....<p>					
 	</div>
 </body>
 </html>
