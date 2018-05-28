@@ -1,13 +1,17 @@
 package com.example.test13.control;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.example.test13.model.BookDbDao;
+import com.example.test13.model.BookDto;
 
 /**
  * Servlet implementation class BookManager
@@ -38,6 +42,49 @@ public class BookManager extends HttpServlet {
 		
 		if (urlSubPath.equals("search")) {
 			viewName = "/search.jsp";
+		}
+		else if (urlSubPath.equals("search_result")) {
+			// get input parameters
+			String code = request.getParameter("code");
+			
+			try {
+				// data processing
+				BookDbDao dao = new BookDbDao();
+				List<BookDto> bookList = dao.getBookList(code);
+
+				// output results
+				request.setAttribute("book_list", bookList);
+				viewName = "/search_result.jsp";			
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+		else if (urlSubPath.equals("insert")) {
+			viewName = "/insert.jsp";
+		}
+		else if (urlSubPath.equals("insert_result")) {
+			// get input parameters
+			BookDto book = new BookDto();
+			book.setCode(request.getParameter("code"));
+			book.setTitle(request.getParameter("title"));
+			book.setWriter(request.getParameter("writer"));
+			book.setPrice(
+					Integer.parseInt(request.getParameter("price")));
+					
+			try {
+				// data prcoessing
+				BookDbDao dao = new BookDbDao();
+				int result = dao.insertBook(book);
+
+				// output results
+				request.setAttribute("result", String.valueOf(result));
+				viewName = "/insert_result.jsp";
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		else {
 			viewName = "/error_400.jsp";
