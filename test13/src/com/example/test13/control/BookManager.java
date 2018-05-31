@@ -66,6 +66,7 @@ public class BookManager extends HttpServlet {
 		else if (urlSubPath.equals("insert_result")) {
 			// get input parameters
 			BookDto book = new BookDto();
+			
 			book.setCode(request.getParameter("code"));
 			book.setTitle(request.getParameter("title"));
 			book.setWriter(request.getParameter("writer"));
@@ -85,6 +86,68 @@ public class BookManager extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}
+		else if (urlSubPath.equals("delete")) {
+			// get input parameters
+			String code = request.getParameter("code");
+
+			try {
+				// data prcoessing
+				BookDbDao dao = new BookDbDao();
+				int result = dao.deleteBook(code);
+
+				// output results
+				request.setAttribute("result", String.valueOf(result));
+				viewName = "/delete_result.jsp";
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else if (urlSubPath.equals("update")) {
+			// get input parameters
+			String code = request.getParameter("code");
+			
+			try {
+				// data processing
+				BookDbDao dao = new BookDbDao();
+				BookDto book = null;
+				List<BookDto> bookList = dao.getBookList(code);
+				if (bookList != null) {
+					book = bookList.get(0);
+				}
+
+				// output results
+				request.setAttribute("book", book);
+				viewName = "/update.jsp";			
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+		else if (urlSubPath.equals("update_result")) {
+			// get input parameters
+			BookDto book = new BookDto();
+			
+			book.setCode(request.getParameter("code"));
+			book.setTitle(request.getParameter("title"));
+			book.setWriter(request.getParameter("writer"));
+			book.setPrice(
+					Integer.parseInt(request.getParameter("price")));
+					
+			try {
+				// data prcoessing
+				BookDbDao dao = new BookDbDao();
+				int result = dao.updateBook(book);
+
+				// output results
+				request.setAttribute("result", String.valueOf(result));
+				viewName = "/update_result.jsp";
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
 		else {
 			viewName = "/error_400.jsp";
