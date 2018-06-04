@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.example.test13.model.BookDbDao;
 import com.example.test13.model.BookDto;
+import com.example.test13.model.DBConnectionInfo;
 
 /**
  * Servlet implementation class BookManager
@@ -38,6 +39,8 @@ public class BookManager extends HttpServlet {
 		String urlSubPath = request.getPathInfo().split("/")[1];
 		
 		// step #2. process input data and route output
+		DBConnectionInfo connInfo =
+			(DBConnectionInfo)getServletContext().getAttribute("connection-info");
 		String viewName = null;
 		
 		if (urlSubPath.equals("search")) {
@@ -49,7 +52,7 @@ public class BookManager extends HttpServlet {
 			
 			try {
 				// data processing
-				BookDbDao dao = new BookDbDao();
+				BookDbDao dao = new BookDbDao(connInfo);
 				List<BookDto> bookList = dao.getBookList(code);
 
 				// output results
@@ -75,7 +78,7 @@ public class BookManager extends HttpServlet {
 					
 			try {
 				// data prcoessing
-				BookDbDao dao = new BookDbDao();
+				BookDbDao dao = new BookDbDao(connInfo);
 				int result = dao.insertBook(book);
 
 				// output results
@@ -93,7 +96,7 @@ public class BookManager extends HttpServlet {
 
 			try {
 				// data prcoessing
-				BookDbDao dao = new BookDbDao();
+				BookDbDao dao = new BookDbDao(connInfo);
 				int result = dao.deleteBook(code);
 
 				// output results
@@ -111,7 +114,7 @@ public class BookManager extends HttpServlet {
 			
 			try {
 				// data processing
-				BookDbDao dao = new BookDbDao();
+				BookDbDao dao = new BookDbDao(connInfo);
 				BookDto book = null;
 				List<BookDto> bookList = dao.getBookList(code);
 				if (bookList != null) {
@@ -138,7 +141,7 @@ public class BookManager extends HttpServlet {
 					
 			try {
 				// data prcoessing
-				BookDbDao dao = new BookDbDao();
+				BookDbDao dao = new BookDbDao(connInfo);
 				int result = dao.updateBook(book);
 
 				// output results

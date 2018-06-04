@@ -27,4 +27,30 @@
   	<servlet-name>book_manager</servlet-name>
   	<url-pattern>/op/*</url-pattern>
   </servlet-mapping>  
+  
+  <context-param>
+  	<param-name>mysql-jdbc-driver</param-name>
+  	<param-value>com.mysql.cj.jdbc.Driver</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>db-url</param-name>
+  	<param-value>jdbc:mysql://localhost:3306/bookdb1?serverTimezone=Asia/Seoul</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>db-user</param-name>
+  	<param-value>testuser</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>db-password</param-name>
+  	<param-value>test1234</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>db-table</param-name>
+  	<param-value>bookinfo</param-value>
+  </context-param>
+  
+  <listener>
+  	<listener-class>com.example.test13.control.BookManagerServletContextListener</listener-class>
+  </listener>
+  
 </web-app>
