@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>개인 정보 입력</title>
+</head>
+<body>
+	<div align="center">
+		<h1>개인 정보 입력</h1><hr>
+		<br><br>
+		<form method="POST" action="input.do">
+		1. 이름: <input type="text" name="name" /><p>
+		2. 성별: <input type="radio" name="gender" value="m">남
+				<input type="radio" name="gender" value="f">여<p>
+		3. 나이: <input type="number" name="age"
+					min="1"  max="150" value="25" /><p>
+		<input type="submit" value="입력" size="10"/>
+		</form>			
+	</div>
+</body>
+</html>
