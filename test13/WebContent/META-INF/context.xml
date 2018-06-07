@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
+<!--
 	<Resource name="jdbc/bookdb"
 		auth="Container"
 		type="javax.sql.DataSource"
@@ -12,4 +13,9 @@
 		maxIdle="20"
 		minIdle="5"
 		maxWait="10000" />
-</Context>
+  -->
+  	<ResourceLink name="jdbc/bookdb"
+  		global="jdbc/g_bookdb"
+  		auth="Container"
+  		type="javax.sql.DataSource" />
+  </Context>
