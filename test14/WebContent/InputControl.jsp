@@ -28,14 +28,22 @@
 	%>
 	<jsp:useBean id="pInfo" 
 		class="com.example.test14.PersonalInfo" scope="request" />
-		
+<%--		
 	<jsp:setProperty property="name" name="pInfo"
 		 value='<%= request.getParameter("name") %>' />
 	<jsp:setProperty property="gender" name="pInfo"
 		 value='<%= request.getParameter("gender").charAt(0) %>' />
 	<jsp:setProperty property="age" name="pInfo"
 		 value='<%= Integer.parseInt(request.getParameter("age")) %>' />
-		 
+ --%>
+ <%--
+	<jsp:setProperty property="name" name="pInfo" param="name" />
+	<jsp:setProperty property="gender" name="pInfo" />
+	<jsp:setProperty property="age" name="pInfo" />
+  --%>
+  
+	<jsp:setProperty property="*" name="pInfo" />
+  		 
 	<jsp:forward page="InputView.jsp" />
 </body>
 </html>
