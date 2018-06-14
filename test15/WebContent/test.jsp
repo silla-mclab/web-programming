@@ -8,9 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Dice Rolling Game</h1><br><br>
+	<h1>EL Function Test</h1><br><br>
 	Current Dice Value = ${myFn:rollIt()}
-	<br><br>
-	Squared Root of 100 = ${myFn:mySqrt(100)}
 </body>
 </html>
